@@ -22,18 +22,74 @@ Implementing a class like `Rational` in Python is great, because it allows custo
 
 ### `Rational` class
 
-```
-// TODO
+A rational number is represented as an instance of the `Rational` class.
+
+But in normal usage, you should very rarely need to use the `Rational` class directly. Instead, you should use the `r` function to tag template literals into `Rational` instances.
+
+```javascript
+
+const { r } = require('rational-arithmetic');
+
+const r1 = r`12/5`;     // 12 / 5
+const r2 = r`2.5`;      // 5 / 2
+const r3 = r`-89.123`;  // - 89123 / 1000
 ```
 
-### Operators
+The `r` tag accepts numbers in any format, including integers and floating points with signs, and improper fractions using the `/` symbol.
 
-```
-// TODO
-```
-### Converting between JavaScript numbers and `Rational`
+If you'd like to construct instances of `Rational` manually, you can also do so.
 
+The signature for the `Rational` class constructor is `Rational(numerator: number, denominator: number[, sign: 1 or -1])`. You can place any JavaScript number primitive into numerator and denominator slots, and they'll be normalized into reduced fractions.
+
+```javascript
+const { Rational } = require('rational-arithmetic');
+
+const r1 = new Rational(12, 5)          // 12 / 5
+const r2 = new Rational(10 / 4)         // 5 / 2
+const r3 = new Rational(89.123, 1, -1)  // - 89123 / 1000
 ```
-// TODO
+
+### Arithmetic
+
+`rational-arithmetic` comes with the following operators. Wherever `number` is marked as the accepted type, instances of `Rational` as well as JavaScript number primitives are accepted; all operators will return instances of `Rational`, even if all operands were primitive.
+
+```javascript
+abs(r`-23/5`)                 // 23 / 5
+add(1, 2, 3)                  // 6
+sub(r`7/6`, 2)                // 19 / 6
+mul(r`12/7`, -3.5, r`24/16`)  // - 9
+div(12, 2.21)                 // 1200 / 221
 ```
+
+#### `abs(number) -> Rational`
+
+Absolute value operator.
+
+#### `add(...number) -> Rational`
+
+Addition operator. `add` is [variadic](https://en.wikipedia.org/wiki/Variadic_function), and will return the sum of all given arguments. You can mix primitives and `Rational` numbers as arguments.
+
+#### `sub(number, number) -> Rational`
+
+Subtraction operator. Unlike `add`, `sub` only ever takes two arguments.
+
+#### `mul(...number) -> Rational`
+
+Multiplication operator. `mul` is [variadic](https://en.wikipedia.org/wiki/Variadic_function), and will return the product of all given arguments. You can mix primitives and `Rational` numbers as arguments.
+
+#### `div(number, number) -> Rational`
+
+Division operator. Unlike `mul`, `div` only ever takes two arguments, and returns the quotient as a `Rational` number.
+
+### Compatibility and conversion between primitives and `Rational` instances
+
+TODO.
+
+### Infinities
+
+TODO.
+
+## Contributing
+
+Found a bug? Please put in a pull request! If you have a feature request, feel free to open an issue, though those aren't guaranteed to be followed-through.
 
