@@ -54,6 +54,13 @@ const r3 = new Rational(89.123, 1, -1)  // - 89123 / 1000
 `rational-arithmetic` comes with the following operators. Wherever `number` is marked as the accepted type, instances of `Rational` as well as JavaScript number primitives are accepted; all operators will return instances of `Rational`, even if all operands were primitive.
 
 ```javascript
+const {
+  r,
+  abs,
+  add, sub,
+  mul, div,
+} = require('rational-arithmetic');
+
 abs(r`-23/5`)                 // 23 / 5
 add(1, 2, 3)                  // 6
 sub(r`7/6`, 2)                // 19 / 6
@@ -87,7 +94,25 @@ TODO.
 
 ### Infinities
 
-TODO.
+Infinite values are correctly supported in `rational-arithmetic`. Infinite values are represente internall as:
+
+```javascript
+// positive Infinity
+Rational{
+  sign: 1,
+  numerator: Infinity,
+  denominator: 1,
+}
+
+// or negative Infinity
+Rational{
+  sign: -1,
+  numerator: Infinity,
+  denominator: 1,
+}
+```
+
+However, these infinite value representations should interoperate transparently with JavaScript primitive values the way other `Rational` values do, as explained below.
 
 ## Contributing
 
