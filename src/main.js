@@ -73,7 +73,7 @@ function addMany(...operands) {
 }
 
 function mulMany(...operands) {
-    return operands.reduce((acc, cur) => add(acc, cur), 1);
+    return operands.reduce((acc, cur) => multiply(acc, cur), 1);
 }
 
 module.exports = {
