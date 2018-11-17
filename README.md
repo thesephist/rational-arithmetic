@@ -90,11 +90,19 @@ Division operator. Unlike `mul`, `div` only ever takes two arguments, and return
 
 ### Compatibility and conversion between primitives and `Rational` instances
 
-TODO.
+Transparent interoperability between JavaScript primitive values and `Rational` instances was a key design goal of `rational-arithmetic`. The library makes interop easy and transparent in two cases
+
+#### Using primitive values in arithmetic operations
+
+When you use primitive numbers in any of the arithmetic operators given as functions here, they'll be transparently promoted to instances of `Rational` without losing any precision. See the examples above in the Arithmetic section for more examples.
+
+#### Using `Rational` instances with native JavaScript operators
+
+When native JavaScript operators like `+ - / * %` or native `Math` functions like `Math.abs()` or `Math.pow()` are used with `Rational` instances, the double precision approximation for the rational numbers will be used instead, requiring no explicit conversion step.
 
 ### Infinities
 
-Infinite values are correctly supported in `rational-arithmetic`. Infinite values are represente internall as:
+Infinite values are correctly supported in `rational-arithmetic`. Infinite values are represented internally as:
 
 ```javascript
 // positive Infinity
