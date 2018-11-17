@@ -1,4 +1,6 @@
-const Rational = require('../lib/rational-number.js');
+const {
+    Rational,
+} = require('../lib/rational-number.js');
 
 class MalformedError extends Error {
     constructor(value) {
@@ -42,10 +44,12 @@ function parse(str) {
 
 function r(strings, ...args) {
     args = args.map(a => a.toString()); // coerce in case any were Rationals
+    console.log(strings, args);
     let str = strings[0];
     for (let i = 0; i < args.length; i ++) {
-        str += args[i] + strings[i];
+        str += args[i] + strings[i + 1];
     }
+    console.log(str);
 
     return parse(str);
 }
