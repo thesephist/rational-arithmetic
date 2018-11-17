@@ -1,5 +1,10 @@
 const {
     Rational,
+
+    add,
+    subtract,
+    multiply,
+    divide,
 } = require('../lib/rational-number.js');
 
 class MalformedError extends Error {
@@ -44,18 +49,29 @@ function parse(str) {
 
 function r(strings, ...args) {
     args = args.map(a => a.toString()); // coerce in case any were Rationals
-    console.log(strings, args);
     let str = strings[0];
     for (let i = 0; i < args.length; i ++) {
         str += args[i] + strings[i + 1];
     }
-    console.log(str);
 
     return parse(str);
+}
+
+function addMany(...operands) {
+    return operands.reduce((acc, cur) => add(acc, cur), 0);
+}
+
+function mulMany(...operands) {
+    return operands.reduce((acc, cur) => add(acc, cur), 1);
 }
 
 module.exports = {
     Rational,
     r,
+
+    add: addMany,
+    sub: subtract,
+    mul: mulMany,
+    div: divide,
 }
 

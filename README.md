@@ -16,6 +16,7 @@ Implementing a class like `Rational` in Python is great, because it allows custo
 - Support for primitive JS double precision floating-point values
 - Ergonomic and readable API
 - Support for all JavaScript unary and binary number operators
+- Transparent interoperability with primitive numbers when exact correctness isn't needed
 
 ## API
 
