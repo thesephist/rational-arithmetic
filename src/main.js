@@ -1,6 +1,7 @@
 const {
     Rational,
 
+    abs,
     add,
     subtract,
     multiply,
@@ -14,8 +15,17 @@ class MalformedError extends Error {
 }
 
 function parse(str) {
-    // template string processor to turn template literals
-    //  into rationals, like r`3/2`.
+    str = str.trim();
+
+    let sign = 1;
+    if (str.includes('-')) {
+        if (str[0] == '-') {
+            sign = -1;
+            str = str.substr(1).trim();
+        } else {
+            throw new MalformedError(str);
+        }
+    }
 
     if (str.includes('/')) {
         const split = str.split('/');
@@ -24,7 +34,7 @@ function parse(str) {
         } else {
             const numerator = parseInt(split[0]);
             const denominator = parseInt(split[1]);
-            return new Rational(numerator, denominator);
+            return new Rational(numerator, denominator, sign);
         }
     } else if (str.includes('.')){
         const split = str.split('.');
@@ -38,11 +48,12 @@ function parse(str) {
 
             return new Rational(
                 integerPart * denominator + fractionPart,
-                denominator
+                denominator,
+                sign
             );
         }
     } else {
-        return new Rational(parseInt(str));
+        return new Rational(parseInt(str), 1, sign);
     }
 
 }
@@ -69,6 +80,7 @@ module.exports = {
     Rational,
     r,
 
+    abs,
     add: addMany,
     sub: subtract,
     mul: mulMany,
