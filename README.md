@@ -171,3 +171,15 @@ These infinite and indeterminate value representations should interoperate trans
 
 Found a bug? Please put in a pull request! If you have a feature request, feel free to open an issue, though those aren't guaranteed to be followed-through.
 
+### Tests
+
+`rational-arithmetic` strives for 100% test coverage of exposed interfaces. You can run tests with
+
+```sh
+yarn test
+# or
+npm test
+```
+
+and add tests under `test/test.js`.
+

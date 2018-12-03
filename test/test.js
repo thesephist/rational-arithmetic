@@ -28,11 +28,11 @@ describe('Rational', () => {
 
         describe('Infinities', () => {
             it('should correctly accept JavaScript primitive Infinity as numerator', () => {
-                // TODO
+                new Rational(Infinity).valueOf().should.equal(Infinity);
             });
 
             it('should correctly accept JavaScript primitive Infinity as denominator', () => {
-                // TODO
+                new Rational(10, Infinity).valueOf().should.be.a('number');
             });
         });
 
@@ -193,14 +193,15 @@ describe('Arithmetic', () => {
     });
 
     describe('div', () => {
-        // TODO: make sure to fix the infinity behaviors when doing inf/inf or 0/0 — we need to represent indeterminate values correctly still!
-
         it('should return the quotient of two rationals', () => {
-
+            div(
+                new Rational(5, 2),
+                new Rational(10, 3)
+            ).equal(new Rational(3, 4)).should.be.true;
         });
 
         it('should accept primitive number types as operands', () => {
-
+            div(-3, 2).equal(new Rational(3, 2, -1)).should.be.true;
         });
 
         describe('Infinities', () => {
