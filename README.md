@@ -49,6 +49,27 @@ const r2 = new Rational(10 / 4)         // 5 / 2
 const r3 = new Rational(89.123, 1, -1)  // - 89123 / 1000
 ```
 
+Instances of the `Rational` class also have access to 3 other utility methods, `normalize()`, `equal(r)`, and `clone()`.
+
+#### `normalize() -> Rational (self)`
+
+Normalizes the numerator, denominator, and sign of the rational number to a canonical format, by ensuring the following is true:
+
+- Numerator and denominator share no common factors larger than 1
+- Numerator is a nonnegative integer
+- Denominator is a natural number
+- Sign is either `1` or `-1`
+
+`normalize()` __mutates the original object__, and returns itself.
+
+#### `equal(r: Rational) -> Boolean`
+
+Does a deep equality comparison between two instances of `Rational`. `equal(r)` compares values after normalization (reducing the fraction).
+
+#### `clone() -> Rational`
+
+Returns a new instance of `Rational` with the same properties as itself.
+
 ### Arithmetic
 
 `rational-arithmetic` comes with the following operators. Wherever `number` is marked as the accepted type, instances of `Rational` as well as JavaScript number primitives are accepted; all operators will return instances of `Rational`, even if all operands were primitive.
@@ -90,7 +111,7 @@ Division operator. Unlike `mul`, `div` only ever takes two arguments, and return
 
 ### Compatibility and conversion between primitives and `Rational` instances
 
-Transparent interoperability between JavaScript primitive values and `Rational` instances was a key design goal of `rational-arithmetic`. The library makes interop easy and transparent in two cases
+Transparent interoperability between JavaScript primitive values and `Rational` instances was a key design goal of `rational-arithmetic`. The library makes interoperation easy and transparent in two cases
 
 #### Using primitive values in arithmetic operations
 
@@ -100,27 +121,51 @@ When you use primitive numbers in any of the arithmetic operators given as funct
 
 When native JavaScript operators like `+ - / * %` or native `Math` functions like `Math.abs()` or `Math.pow()` are used with `Rational` instances, the double precision approximation for the rational numbers will be used instead, requiring no explicit conversion step.
 
-### Infinities
+### Infinities and indeterminate (undefined) values
 
-Infinite values are correctly supported in `rational-arithmetic`. Infinite values are represented internally as:
+Infinite and indeterminate values are correctly supported in `rational-arithmetic`. Infinite values are represented internally as
 
 ```javascript
 // positive Infinity
-Rational{
+Rational {
   sign: 1,
   numerator: Infinity,
   denominator: 1,
 }
 
 // or negative Infinity
-Rational{
+Rational {
   sign: -1,
   numerator: Infinity,
   denominator: 1,
 }
 ```
 
-However, these infinite value representations should interoperate transparently with JavaScript primitive values the way other `Rational` values do, as explained below.
+and undefined or indeterminate values (the result of evaluating `Infinity / Infinity` or `0 / 0`) are represented as
+
+```javascript
+// indeterminate value, NaN
+Rational {
+  sign: 1,
+  numerator: NaN,
+  denominator: NaN,
+}
+```
+
+and these values are canonicalized to NaN when cast to primitive values.
+
+The full list of arithmetic involving infinities follows native ECMAScript conventions, and is as follows:
+
+```javascript
+Infinity / Infinity -> NaN
+Infinity / 0 -> Infinity
+0 / Infinity -> 0
+0 / 0 -> NaN
+Infinity / <finite number> -> Infinity
+<finite number> / Infinity -> 0
+```
+
+These infinite and indeterminate value representations should interoperate transparently with JavaScript primitive values the way other `Rational` values do.
 
 ## Contributing
 
