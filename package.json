@@ -14,9 +14,9 @@
     "mocha": "^5.2.0"
   },
   "keywords": [
-      "number",
-      "math",
-      "fraction",
-      "rational"
+    "number",
+    "math",
+    "fraction",
+    "rational"
   ]
 }
