@@ -200,6 +200,17 @@ describe('Arithmetic', () => {
             ).equal(new Rational(3, 4)).should.be.true;
         });
 
+        it('should return the correct quotient for negative operands', () => {
+            div(
+                new Rational(5, 2),
+                new Rational(10, 3, -1)
+            ).equal(new Rational(3, 4, -1)).should.be.true;
+            div(
+                new Rational(5, 2, -1),
+                new Rational(10, 3, -1)
+            ).equal(new Rational(3, 4)).should.be.true;
+        });
+
         it('should accept primitive number types as operands', () => {
             div(-3, 2).equal(new Rational(3, 2, -1)).should.be.true;
         });
