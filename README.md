@@ -1,5 +1,8 @@
 # rational-arithmetic
 
+[![npm rational-arithmetic](https://img.shields.io/npm/v/rational-arithmetic.svg)](http://npm.im/rational-arithmetic)
+[![Build Status](https://travis-ci.com/thesephist/rational-arithmetic.svg?branch=master)](https://travis-ci.com/thesephist/rational-arithmetic)
+
 A no-dependency, lightweight JS library for arithmetic with rational numbers
 
 ## Rationale
