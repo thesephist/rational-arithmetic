@@ -26,6 +26,10 @@ describe('Rational', () => {
             new Rational(3.5, 10.5).equal(new Rational(1, 3)).should.be.true;
         });
 
+        it('should handle large numerator & denumerator', () => {
+            new Rational(10000000000, 10000000000).valueOf().should.equal(1);
+        });
+
         describe('Infinities', () => {
             it('should correctly accept JavaScript primitive Infinity as numerator', () => {
                 new Rational(Infinity).valueOf().should.equal(Infinity);
