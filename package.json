@@ -1,6 +1,6 @@
 {
   "name": "rational-arithmetic",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A no-depndency, lightweight library for arithmetic with rational numbers",
   "main": "src/main.js",
   "repository": "git@github.com:thesephist/rational-arithmetic.git",
