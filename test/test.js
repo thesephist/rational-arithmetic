@@ -250,5 +250,9 @@ describe('Arithmetic', () => {
         });
     });
 
+    it('should not break on large numbers / numbers out of i32 range', () => {
+        add(r`1/100000`, r`1/100000`).equal(r`1/50000`).should.be.true;
+        mul(r`1/100000`, r`1/100000`).equal(r`1/10000000000`).should.be.true;
+    });
 });
 
